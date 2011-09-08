@@ -12,6 +12,8 @@ Gem::Specification.new do |s|
   s.description = %q{Gem para controle de conteúdo de sites rails.}
 
   #s.rubyforge_project = "qw3cms"
+  
+  s.add_dependency "ckeditor"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
