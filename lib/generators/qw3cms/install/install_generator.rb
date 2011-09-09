@@ -75,8 +75,10 @@ module Qw3cms
       end
       
       def append_menu_css
-        append_file '#leftbar .menus-leftbar {\nbackground:url("../images/menu-icons/menus.png") no-repeat scroll 10px padding-box transparent;\n}\n'
-        append_file '#leftbar .paginas-leftbar {\nbackground:url("../images/menu-icons/paginas.png") no-repeat scroll 10px padding-box transparent;\n}\n'
+        append_file 'public/stylesheets/backend.css', do
+          '#leftbar .menus-leftbar {\nbackground:url("../images/menu-icons/menus.png") no-repeat scroll 10px padding-box transparent;\n}\n
+          #leftbar .paginas-leftbar {\nbackground:url("../images/menu-icons/paginas.png") no-repeat scroll 10px padding-box transparent;\n}\n'
+        end
       end
       
       def copy_images
