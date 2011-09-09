@@ -1,18 +1,24 @@
-<div class="page_header">
-  <h1>Ítens de menu</h1>
-</div>
-
-<div class="inside">
-
-  <div id="filtros">
-	  <%= form_tag( "/administrator/itens_menu/buscar", :remote => :true ) do %>
-		  <%= select 'menu', "id", options_for_select( Menu.all.collect {|m| [ m.nome, m.id ] }, ( params[:menu][:id] unless params[:menu].nil? ) ), :include_blank => "-- Selecione um menu --" %>
-		    <%= submit_tag "Buscar" %>
-	  <% end %>
+<%= form_tag( "#", :id => "itens_menu_form", :name => "itens_menu_form") do %>
+  <div class="page_header">
+    <h1>Ítens de menu</h1>
+    <div class="menu-acoes direita">
+      <%= link_to "#", :class => "button publicar", :onclick => 'definirAction( "itens_menu_form", "/administrator/itens_menu/multi_publicar?publicar=1")' do %>
+        <span>Publicar</span>
+      <% end %>
+      <%= link_to "#", :class => "button despublicar", :onclick => 'definirAction( "itens_menu_form", "/administrator/itens_menu/multi_publicar?publicar=0" )' do %>
+        <span>Despublicar</span>
+      <% end %>
+      <%= link_to "#", :class => "button remover", :onclick => 'definirAction( "itens_menu_form", "/administrator/itens_menu/multi_remover", 1 )' do %>
+        <span>Remover</span>
+      <% end %>
+    </div>
+    <div class="clear"></div>
   </div>
 
-  <div id="itens-menu-index">
-    <%= render "itens" %>
-  </div>
-</div>
+  <div class="inside">
 
+    <div id="itens-menu-index">
+      <%= render "itens" %>
+    </div>
+  </div>
+<% end %>

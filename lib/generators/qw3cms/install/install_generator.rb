@@ -53,6 +53,9 @@ module Qw3cms
           end
           
           get 'paginas/show'\n"
+          
+          # Gerando rotas para ordenação
+          generate "qw3common:routes administrator/itens_menu"
         end
       end
       

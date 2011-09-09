@@ -12,7 +12,7 @@ class Administrator::ItensMenuController < Administrator::AdminController
       conditions = "menu_id = #{params[:menu][:id]}"
     end
     
-    @itens_menu = ItemMenu.paginate :page => params[:page], :conditions => conditions
+    @itens_menu = ItemMenu.paginate :page => params[:page], :conditions => conditions, :order => "ordem ASC"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -75,6 +75,82 @@ class Administrator::ItensMenuController < Administrator::AdminController
     @item_menu = ItemMenu.find(params[:id])
     @item_menu.destroy
 
+    respond_to do |format|
+      format.html { redirect_to(administrator_itens_menu_url) }
+      format.xml  { head :ok }
+    end
+  end
+  
+  def publicar 
+    @item_menu = ItemMenu.find(params[:id])
+    @item_menu.publicado = !@item_menu.publicado
+    @item_menu.save
+    respond_to do |format|
+      format.html { redirect_to(administrator_itens_menu_url) }
+      format.xml  { head :ok }
+    end
+  end
+  
+  def multi_remover
+    
+    ids = params[:cid]
+    if !ids.nil? and !ids.count.zero?
+      ids.each do |id|
+        if !id.empty?
+          item = ItemMenu.find(id)
+          item.destroy
+        end
+      end
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to(administrator_itens_menu_url) }
+      format.xml  { head :ok }
+    end
+  end
+  
+  def multi_publicar 
+    
+    ids = params[:cid]
+    if !ids.nil? and !ids.count.zero?
+      ids.each do |id|
+        if !id.empty?
+          item = ItemMenu.find(id)
+          item.publicado = params[:publicar]
+          item.save
+        end
+      end
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to(administrator_itens_menu_url) }
+      format.xml  { head :ok }
+    end
+  end
+  
+  def ordenar
+    ids = params[:cid]
+    if !ids.nil? and !ids.count.zero?
+      item = ItemMenu.find ids.first
+      if !params[:cima].nil? and params[:cima].to_i == 0
+        item.ordem = item.ordem + 1
+        item2 = ItemMenu.find_by_ordem item.ordem
+        if !item2.nil?
+          item2.ordem = item2.ordem - 1
+          item2.save
+          item.save
+        end
+      else
+        item.ordem = item.ordem - 1
+        item2 = ItemMenu.find_by_ordem item.ordem
+        if !item2.nil?
+          item2.ordem = item2.ordem + 1
+          item2.save
+          item.save
+        end
+      end
+    end
+    
     respond_to do |format|
       format.html { redirect_to(administrator_itens_menu_url) }
       format.xml  { head :ok }

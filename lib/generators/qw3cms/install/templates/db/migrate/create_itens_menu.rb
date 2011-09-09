@@ -7,6 +7,7 @@ class CreateItensMenu < ActiveRecord::Migration
       t.string :link
       t.string :filtro
       t.integer :ordem
+      t.boolean :publicado, :default => 1
       t.references :menu
 
       t.timestamps
