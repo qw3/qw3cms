@@ -1,0 +1,13 @@
+en:
+  # CKEditor
+  ckeditor:
+    page_title: "CKEditor File Manager"
+    upload_files: "Upload files"
+    buttons:
+      cancel: "Cancel"
+      refresh:
+        title: "Refresh"
+        hint: "Refresh page"
+      upload:
+        title: "Upload"
+        hint: "Upload new file"

@@ -74,8 +74,20 @@ module Qw3cms
         end
       end
       
+      def append_menu_css
+        append_file( '#leftbar .menus-leftbar {\nbackground:url("../images/menu-icons/menus.png") no-repeat scroll 10px padding-box transparent;\n}\n'
+        append_file( '#leftbar .paginas-leftbar {\nbackground:url("../images/menu-icons/paginas.png") no-repeat scroll 10px padding-box transparent;\n}\n'
+      end
+      
       def copy_images
         copy_file "public/images/icons/itens-menu.png", "public/images/icons/itens-menu.png"
+        copy_file "public/images/menu-icons/menus.png", "public/images/menu-icons/menus.png"
+        copy_file "public/images/menu-icons/paginas.png", "public/images/menu-icons/paginas.png"
+      end
+      
+      def copy_locales
+        copy_file "config/locales/ckeditor.en.yml", "config/locales/ckeditor.en.yml"
+        copy_file "config/locales/ckeditor.pt-BR.yml", "config/locales/ckeditor.pt-BR.yml"
       end
       
     end
