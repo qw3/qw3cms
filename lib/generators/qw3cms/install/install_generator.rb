@@ -11,6 +11,10 @@ module Qw3cms
       
       source_root File.expand_path("../templates", __FILE__)
       
+      def insert_gem
+        gem "ckeditor"
+      end
+      
       # Implement the required interface for Rails::Generators::Migration.
       # taken from http://github.com/rails/rails/blob/master/activerecord/lib/generators/active_record.rb
       def self.next_migration_number(dirname)
@@ -28,8 +32,11 @@ module Qw3cms
       end
       
       def create_ckeditor
-        generate "ckeditor_core"
-        generate "ckeditor_models"
+        if yes? "Deseja instalar o ckeditor?"
+          generate "ckeditor:install"
+          gem "paperclip"        
+          generate 'ckeditor:models --orm=active_record --backend=paperclip'
+        end
         
         rake "db:migrate"
       end
@@ -43,15 +50,27 @@ module Qw3cms
             controller :itens_menu do
               post 'itens_menu/buscar' => :index
             end
-          end"
-          route "get paginas/show"
+          end
+          
+          get 'paginas/show'\n"
         end
       end
       
       def create_function_menu_detalhes
         inject_into_class 'app/controllers/administrator/admin_controller.rb', Administrator::AdminController do
-          "def menus_menu_detalhes\n@detalhes_parcial = 'menus'\nend"
-          "def paginas_menu_detalhes\n@detalhes_parcial = 'paginas'\nend"
+          "def menus_menu_detalhes
+            @detalhes_parcial = 'menus'
+          end
+          def paginas_menu_detalhes
+            @detalhes_parcial = 'paginas'
+          end\n"
+        end
+      end
+      
+      def insert_menu_calls
+        inject_into_file "app/views/template/_leftbar.html.erb", :before => "</ul>" do
+          "<%= render '/administrator/menus/leftbar_item' %>
+          <%= render '/administrator/paginas/leftbar_item' %>\n"
         end
       end
       

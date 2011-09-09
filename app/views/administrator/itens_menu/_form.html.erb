@@ -1,0 +1,38 @@
+<%= form_for([:administrator, @item_menu]) do |f| %>
+  <% if @item_menu.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item_menu.errors.count, I18n.t( "erro" ) ) %>:</h2>
+
+      <ul>
+      <% @item_menu.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome, I18n.t("admin_itens_menu_nome") %> 
+    <%= f.text_field :nome %>
+  </div>
+  <div class="field">
+    <%= f.label :alias, I18n.t("admin_itens_menu_alias") %> 
+    <%= f.text_field :alias %>
+  </div>
+  <div class="field">
+    <%= f.label :link, I18n.t("admin_itens_menu_link") %> 
+    <%= f.text_field :link %>
+  </div>
+  <div class="field">
+    <%= f.label :filtro, I18n.t("admin_itens_menu_filtro") %> 
+    <%= f.text_field :filtro %>
+  </div>
+  <div class="field">
+    <%= f.label :menu_id, I18n.t("admin_itens_menu_menu") %> 
+    <%= f.select :menu_id, Menu.all.collect{ |m| [m.nome, m.id] }, :include_blank => I18n.t( "admin_itens_menu_combo_menu" ) %>
+  </div>
+  <div class="actions">
+    <%= link_to "< #{I18n.t("admin_itens_menu_voltar")}", administrator_itens_menu_path, :class => 'button cancel' %>
+    <%= f.submit :class => 'button', :value => I18n.t("admin_itens_menu_salvar") %>
+  </div>
+<% end %>

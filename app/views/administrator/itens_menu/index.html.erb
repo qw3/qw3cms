@@ -1,0 +1,18 @@
+<div class="page_header">
+  <h1><%= I18n.t("admin_itens_menu_index_titulo") %></h1>
+</div>
+
+<div class="inside">
+
+  <div id="filtros">
+	  <%= form_tag( "/administrator/itens_menu/buscar", :remote => :true ) do %>
+		  <%= select 'menu', "id", options_for_select( Menu.all.collect {|m| [ m.nome, m.id ] }, ( params[:menu][:id] unless params[:menu].nil? ) ), :include_blank => I18n.t("admin_itens_menu_combo_menu") %>
+		    <%= submit_tag I18n.t("admin_vendas_buscar") %>
+	  <% end %>
+  </div>
+
+  <div id="itens-menu-index">
+    <%= render "itens" %>
+  </div>
+</div>
+

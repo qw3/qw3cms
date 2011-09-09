@@ -1,0 +1,24 @@
+<table class="list">
+  <tr>
+    <th><%= I18n.t("admin_menus_id") %></th>
+    <th><%= I18n.t("admin_menus_nome") %></th>
+    <th><%= I18n.t("admin_menus_alias") %></th>
+    <th><%= I18n.t("admin_menus_itens") %></th>
+    <th><%= I18n.t("admin_menus_remover") %> ?</th>
+  </tr>
+
+<% @menus.each do |menu| %>
+  <tr class="<%= cycle('linha0','linha1') %>">
+    <td width="5%">
+      <%= link_to menu.id, edit_administrator_menu_path(menu) %>
+    </td>
+    <td>
+      <%= link_to menu.nome, edit_administrator_menu_path(menu) %>
+    </td>
+    <td><%= menu.alias %></td>
+    <td width="15%" align="center"><%= link_to image_tag( "icons/itens-menu.png" ), administrator_itens_menu_path( "menu[id]" => menu ) %></td>
+    <td width="15%" align="center"><%= link_to image_tag('icons/remove-icon.png', :border => 0, :title => I18n.t("admin_menus_remover")), administrator_menu_path(menu), :confirm => I18n.t("admin_menus_remover_confirmacao"), :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<%= pagination_footer @menus %>

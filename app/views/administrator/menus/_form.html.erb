@@ -1,0 +1,26 @@
+<%= form_for([:administrator, @menu]) do |f| %>
+  <% if @menu.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@menu.errors.count, I18n.t( "erro" ) ) %>:</h2>
+
+      <ul>
+      <% @menu.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome, I18n.t("admin_menus_nome") %> 
+    <%= f.text_field :nome %>
+  </div>
+  <div class="field">
+    <%= f.label :alias, I18n.t("admin_menus_alias") %> 
+    <%= f.text_field :alias %>
+  </div>
+  <div class="actions">
+    <%= link_to "< #{I18n.t("admin_menus_voltar")}", administrator_menus_path, :class => 'button cancel' %>
+    <%= f.submit :class => 'button', :value => I18n.t("admin_menus_salvar") %>
+  </div>
+<% end %>
