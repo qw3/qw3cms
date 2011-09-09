@@ -1,9 +1,9 @@
 <table class="list">
   <tr>
-    <th><%= I18n.t("admin_paginas_id") %></th>
-    <th><%= I18n.t("admin_paginas_titulo") %></th>
-    <th><%= I18n.t("admin_paginas_conteudo") %></th>
-    <th><%= I18n.t("admin_paginas_remover") %>?</th>
+    <th>ID</th>
+    <th>Título</th>
+    <th>Conteúdo</th>
+    <th>Remover ?</th>
   </tr>
 
 <% @paginas.each do |pagina| %>
@@ -11,7 +11,7 @@
     <td width="5%" align="center"><%= link_to pagina.id, edit_administrator_pagina_path(pagina) %>
     <td><%= link_to pagina.titulo, edit_administrator_pagina_path( pagina ) %></td>
     <td><%= strip_tags pagina.conteudo[0..170] %></td>
-    <td width="10%" align="center"><%= link_to image_tag('icons/remove-icon.png', :border => 0, :title => I18n.t("admin_paginas_remover") ), "/administrator/paginas/#{pagina.id}", :confirm => I18n.t("admin_paginas_remover_confirmacao"), :method => :delete %></td>
+    <td width="10%" align="center"><%= link_to image_tag('icons/remove-icon.png', :border => 0, :title => "Remover" ), "/administrator/paginas/#{pagina.id}", :confirm =>   'Você tem certeza?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

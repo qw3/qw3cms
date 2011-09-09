@@ -1,7 +1,7 @@
 <%= form_for([:administrator, @item_menu]) do |f| %>
   <% if @item_menu.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@item_menu.errors.count, I18n.t( "erro" ) ) %>:</h2>
+      <h2><%= pluralize(@item_menu.errors.count, "erro" ) %>:</h2>
 
       <ul>
       <% @item_menu.errors.full_messages.each do |msg| %>
@@ -12,27 +12,27 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :nome, I18n.t("admin_itens_menu_nome") %> 
+    <%= f.label :nome%> 
     <%= f.text_field :nome %>
   </div>
   <div class="field">
-    <%= f.label :alias, I18n.t("admin_itens_menu_alias") %> 
+    <%= f.label :alias, "Nome de sistema (preenchimento automático)" %>
     <%= f.text_field :alias %>
   </div>
   <div class="field">
-    <%= f.label :link, I18n.t("admin_itens_menu_link") %> 
+    <%= f.label :link %> 
     <%= f.text_field :link %>
   </div>
   <div class="field">
-    <%= f.label :filtro, I18n.t("admin_itens_menu_filtro") %> 
+    <%= f.label :filtro %> 
     <%= f.text_field :filtro %>
   </div>
   <div class="field">
-    <%= f.label :menu_id, I18n.t("admin_itens_menu_menu") %> 
-    <%= f.select :menu_id, Menu.all.collect{ |m| [m.nome, m.id] }, :include_blank => I18n.t( "admin_itens_menu_combo_menu" ) %>
+    <%= f.label :menu_id %> 
+    <%= f.select :menu_id, Menu.all.collect{ |m| [m.nome, m.id] }, :include_blank => "-- Selecione um menu --" %>
   </div>
   <div class="actions">
-    <%= link_to "< #{I18n.t("admin_itens_menu_voltar")}", administrator_itens_menu_path, :class => 'button cancel' %>
-    <%= f.submit :class => 'button', :value => I18n.t("admin_itens_menu_salvar") %>
+    <%= link_to "< Voltar", administrator_itens_menu_path, :class => 'button cancel' %>
+    <%= f.submit :class => 'button', :value => 'Salvar' %>
   </div>
 <% end %>

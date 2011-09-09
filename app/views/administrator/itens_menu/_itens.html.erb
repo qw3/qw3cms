@@ -1,12 +1,12 @@
 <table class="list">
   <tr>
-    <th><%= I18n.t("admin_itens_menu_id") %></th>
-    <th><%= I18n.t("admin_itens_menu_nome") %></th>
-    <th><%= I18n.t("admin_itens_menu_alias") %></th>
-    <th><%= I18n.t("admin_itens_menu_link") %></th>
-    <th><%= I18n.t("admin_itens_menu_filtro") %></th>
-    <th><%= I18n.t("admin_itens_menu_menu") %></th>
-    <th><%= I18n.t("admin_itens_menu_remover") %>?</th>
+    <th>ID</th>
+    <th>Nome</th>
+    <th>Nome de sistema</th>
+    <th>Link</th>
+    <th>Filtro</th>
+    <th>Menu</th>
+    <th>Remover ?</th>
   </tr>
 
 <% @itens_menu.each do |item| %>
@@ -21,7 +21,7 @@
     <td><%= item.link %></td>
     <td><%= item.filtro %></td>
     <td><%= item.menu.nome %></td>
-    <td align="center"><%= link_to image_tag('icons/remove-icon.png', :border => 0, :title => I18n.t("admin_itens_menu_remover")), administrator_item_menu_path(item), :confirm => I18n.t("admin_itens_menu_remover_confirmacao"), :method => :delete %></td>
+    <td align="center"><%= link_to image_tag('icons/remove-icon.png', :border => 0, :title => 'Remover'), administrator_item_menu_path(item), :confirm => "Você tem certeza?", :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -1,7 +1,7 @@
 <%= form_for([:administrator, @menu]) do |f| %>
   <% if @menu.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@menu.errors.count, I18n.t( "erro" ) ) %>:</h2>
+      <h2><%= pluralize(@menu.errors.count, "erro" ) %>:</h2>
 
       <ul>
       <% @menu.errors.full_messages.each do |msg| %>
@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :nome, I18n.t("admin_menus_nome") %> 
+    <%= f.label :nome %> 
     <%= f.text_field :nome %>
   </div>
   <div class="field">
-    <%= f.label :alias, I18n.t("admin_menus_alias") %> 
+    <%= f.label :alias, "Nome de sistema (preenchimento automático)" %> 
     <%= f.text_field :alias %>
   </div>
   <div class="actions">
-    <%= link_to "< #{I18n.t("admin_menus_voltar")}", administrator_menus_path, :class => 'button cancel' %>
-    <%= f.submit :class => 'button', :value => I18n.t("admin_menus_salvar") %>
+    <%= link_to "< Voltar", administrator_menus_path, :class => 'button cancel' %>
+    <%= f.submit :class => 'button', :value => 'Salvar' %>
   </div>
 <% end %>

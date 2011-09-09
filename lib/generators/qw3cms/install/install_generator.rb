@@ -74,6 +74,10 @@ module Qw3cms
         end
       end
       
+      def copy_images
+        copy_file "public/images/icons/itens-menu.png", "public/images/icons/itens-menu.png"
+      end
+      
     end
   end
 end

@@ -1,7 +1,7 @@
 <%= form_for([:administrator,   @pagina]) do |f| %>
   <% if @pagina.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@pagina.errors.count, I18n.t( "erro" ) ) %>:</h2>
+      <h2><%= pluralize(@pagina.errors.count, "erro" ) %>:</h2>
 
       <ul>
       <% @pagina.errors.full_messages.each do |msg| %>
@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :titulo, I18n.t("admin_paginas_titulo") %> 
+    <%= f.label :titulo, "Título" %> 
     <%= f.text_field :titulo, :size => "99px" %>
   </div>
   <div class="field">
-    <%= f.label :conteudo, I18n.t("admin_paginas_conteudo") %> 
+    <%= f.label :conteudo, "Conteúdo" %> 
     <%= f.cktext_area :conteudo, :toolbar=>'Full', :width=>'900px', :height=>'400px' %>
   </div>
   <div class="actions">
-	<%= link_to "< #{I18n.t("admin_paginas_voltar")}", administrator_paginas_path, :class => 'button cancel' %>
-    <%= f.submit :class => 'button', :value => I18n.t("admin_paginas_salvar") %>
+	<%= link_to "< Voltar", administrator_paginas_path, :class => 'button cancel' %>
+    <%= f.submit :class => 'button', :value => 'Salvar' %>
   </div>
 <% end %>

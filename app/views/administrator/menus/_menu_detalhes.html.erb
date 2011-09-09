@@ -1,23 +1,23 @@
 <li>
-  <%= link_to administrator_itens_menu_path, :class => 'itensmenu-leftbar' do %>
-    <span>Ítens de menu</span>
-  <% end %>
-</li>
-
-<li>
-  <%= link_to new_administrator_item_menu_path, :class => "add-leftbar" do %>
-    <span>Adicionar item de menu</span>
-  <% end %>
-</li>
-
-<li>
   <%= link_to administrator_menus_path, :class => 'menu-leftbar' do %>
     <span>Menus</span>
   <% end %>
 </li>
 
 <li>
+  <%= link_to administrator_itens_menu_path, :class => 'itensmenu-leftbar' do %>
+    <span>Ítens de menu</span>
+  <% end %>
+</li>
+
+<li>
   <%= link_to new_administrator_menu_path, :class => "add-leftbar" do %>
     <span>Adicionar menu</span>
+  <% end %>
+</li>
+
+<li>
+  <%= link_to new_administrator_item_menu_path, :class => "add-leftbar" do %>
+    <span>Adicionar ítem de menu</span>
   <% end %>
 </li>
