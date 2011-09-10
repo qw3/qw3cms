@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Menu < ActiveRecord::Base
+
+  include BrHelper
+
   has_many :item_menu, :dependent => :destroy
   
   validates :alias, :uniqueness => true
@@ -7,8 +10,6 @@ class Menu < ActiveRecord::Base
   before_save :montar_alias
   
   def montar_alias
-    if self.alias.nil? or self.alias.empty?
-      self.alias = self.nome.sub( " ", "_" ).downcase
-    end
+    self.alias = create_alias self.alias, self.nome
   end
 end
