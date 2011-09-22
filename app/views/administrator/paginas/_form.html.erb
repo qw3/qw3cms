@@ -12,8 +12,12 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :categoria_pagina_id, "Categoria" %> 
+    <%= f.select :categoria_pagina_id, options_for_select( CategoriaPagina.all.collect{ |c| [c.nome, c.id] }, @pagina.categoria_pagina_id), :include_blank => "-- Selecione uma Categoria --" %>
+  </div>
+  <div class="field">
     <%= f.label :titulo, "Título" %> 
-    <%= f.text_field :titulo, :size => "99px" %>
+    <%= f.text_field :titulo, :size => "110px" %>
   </div>
   <div class="field">
     <%= f.label :conteudo, "Conteúdo" %> 

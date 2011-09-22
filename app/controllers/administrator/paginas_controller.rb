@@ -49,7 +49,7 @@ class Administrator::PaginasController < Administrator::AdminController
 
     respond_to do |format|
       if @pagina.save
-        format.html { redirect_to(administrator_paginas_path, :notice => 'Pagina was successfully created.') }
+        format.html { redirect_to(administrator_paginas_path, :notice => 'Página criada com sucesso.') }
         format.xml  { render :xml => @pagina, :status => :created, :location => @pagina }
       else
         format.html { render :action => "new" }
@@ -65,7 +65,7 @@ class Administrator::PaginasController < Administrator::AdminController
 
     respond_to do |format|
       if @pagina.update_attributes(params[:pagina])
-        format.html { redirect_to(administrator_paginas_path, :notice => 'Pagina was successfully updated.') }
+        format.html { redirect_to(administrator_paginas_path, :notice => 'Página atualizada com sucesso.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -28,6 +28,7 @@ module Qw3cms
       def create_migrations
         migration_template 'db/migrate/create_menus.rb', 'db/migrate/create_menus.rb'
         migration_template 'db/migrate/create_itens_menu.rb', 'db/migrate/create_itens_menu.rb'
+        migration_template 'db/migrate/create_categorias_pagina.rb', 'db/migrate/create_categorias_pagina.rb'
         migration_template 'db/migrate/create_paginas.rb', 'db/migrate/create_paginas.rb'
       end
       
@@ -46,6 +47,7 @@ module Qw3cms
           route "namespace :administrator do
             resources :menus
             resources :itens_menu
+            resources :categorias_pagina
             resources :paginas
             controller :itens_menu do
               post 'itens_menu/buscar' => :index

@@ -4,6 +4,7 @@ class CreatePaginas < ActiveRecord::Migration
     create_table :paginas do |t|
       t.string :titulo
       t.text :conteudo
+      t.references :categoria_pagina
 
       t.timestamps
     end

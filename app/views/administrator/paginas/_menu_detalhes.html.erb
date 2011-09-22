@@ -1,6 +1,16 @@
 <li>
+  <%= link_to administrator_categorias_pagina_path do %>
+    <span>Categorias</span>
+  <% end %>
+</li>
+<li>
   <%= link_to administrator_paginas_path do %>
     <span>Páginas</span>
+  <% end %>
+</li>
+<li>
+  <%= link_to new_administrator_categoria_pagina_path, :class => "add-leftbar" do %>
+    <span>Adicionar categoria</span>
   <% end %>
 </li>
 <li>

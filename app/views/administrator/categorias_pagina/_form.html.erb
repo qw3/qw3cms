@@ -1,0 +1,26 @@
+<%= form_for([:administrator, @categoria]) do |f| %>
+  <% if @categoria.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@categoria.errors.count, "erro" ) %>:</h2>
+
+      <ul>
+      <% @categoria.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome %> 
+    <%= f.text_field :nome %>
+  </div>
+  <div class="field">
+    <%= f.label :alias, "Nome de sistema (preenchimento automático)" %> 
+    <%= f.text_field :alias %>
+  </div>
+  <div class="actions">
+	<%= link_to "< Voltar", administrator_categorias_pagina_path, :class => 'button cancel' %>
+    <%= f.submit :class => 'button', :value => 'Salvar' %>
+  </div>
+<% end %>
