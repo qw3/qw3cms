@@ -3,6 +3,6 @@
     <%= @pagina.titulo %>
   </h1>
   <div id="conteudo">
-    <%= @pagina.conteudo.html_safe %>
+    <%= @pagina.conteudo.gsub('<hr />').html_safe %>
   </div>
 </div>
