@@ -1,0 +1,8 @@
+<ul class="menu">
+  <% count = 0 %>
+  <%= while count < itens.count - 1 do %>
+    <li><%= link_to itens[count].nome, itens[count].link_corrigido %></li>
+    <% count = count + 1 %>
+  <% end %>
+  <li class="last"><%= link_to itens[count].nome, itens[count].link_corrigido %></li>
+</ul>

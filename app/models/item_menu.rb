@@ -22,4 +22,12 @@ class ItemMenu < ActiveRecord::Base
       self.ordem = ItemMenu.last.ordem + 1
     end
   end
+  
+  def link_corrigido
+    if self.link[0] != '/'
+      self.link = '/' + self.link
+    end
+    return self.link
+  end
+  
 end
