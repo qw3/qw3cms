@@ -44,18 +44,22 @@ module Qw3cms
       
       def create_routes
         if yes? "Deseja criar as rotas?"
-          route "namespace :administrator do
-            resources :menus
-            resources :itens_menu
-            resources :categorias_pagina
-            resources :paginas
-            controller :itens_menu do
-              post 'itens_menu/buscar' => :index
-            end
-          end
-          
-          get 'paginas/show'\n"
-          
+          route "
+  namespace :administrator do
+    resources :menus
+    resources :itens_menu
+    resources :categorias_pagina
+    resources :paginas
+    controller :itens_menu do
+      post 'itens_menu/buscar' => :index
+    end
+  end
+  
+  controller :paginas do
+    get 'paginas/:id' => :show
+  end
+  "
+      
           # Gerando rotas para ordenação
           generate "qw3common:routes administrator/itens_menu"
         end

@@ -1,7 +1,7 @@
-<div id="pagina">
-  <div id="titulo">
+<div id="pagina<%= @pagina.id %>" class="pagina">
+  <h1 class="titulo">
     <%= @pagina.titulo %>
-  </div>
+  </h1>
   <div id="conteudo">
     <%= @pagina.conteudo.html_safe %>
   </div>
