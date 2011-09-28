@@ -2,7 +2,9 @@
   <h1 class="titulo">
     <%= @pagina.titulo %>
   </h1>
-  <div id="conteudo">
-    <%= @pagina.conteudo.gsub('<hr />').html_safe %>
-  </div>
+  <% unless @pagina.conteudo.nil? %>
+      <div id="conteudo">
+        <%= @pagina.conteudo.gsub('<hr />').html_safe %>
+      </div>
+  <% end %>
 </div>
