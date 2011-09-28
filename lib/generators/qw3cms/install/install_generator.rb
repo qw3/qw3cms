@@ -13,7 +13,6 @@ module Qw3cms
       
       def insert_gem
         gem "ckeditor"
-        gem 'nokogiri'
       end
       
       # Implement the required interface for Rails::Generators::Migration.
