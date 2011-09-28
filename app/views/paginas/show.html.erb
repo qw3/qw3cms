@@ -4,7 +4,7 @@
   </h1>
   <% unless @pagina.conteudo.nil? %>
       <div id="conteudo">
-        <%= @pagina.conteudo.gsub('<hr />').html_safe %>
+        <%= @pagina.conteudo.gsub('<hr />', '').html_safe %>
       </div>
   <% end %>
 </div>
