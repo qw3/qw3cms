@@ -26,13 +26,13 @@
     <td width="15%" align="center"><%= ordenar_td item.id, "itens_menu" %></td>
     <td align="center" width="10%">
       <% if item.publicado %>
-        <% icone = image_tag 'icons/publicado.png', :size => '16x16' %>
+        <% icone = image_tag 'lib/qw3/publicado.png', :size => '16x16' %>
       <% else %>
-        <% icone = image_tag 'icons/sair.png', :size => '16x16' %>
+        <% icone = image_tag 'lib/qw3/sair.png', :size => '16x16' %>
       <% end %>
       <%= link_to icone, "/administrator/itens_menu/#{item.id}/publicar" %>
     </td>
-    <td align="center"><%= link_to image_tag('icons/remove-icon.png', :border => 0, :title => 'Remover'), administrator_item_menu_path(item), :confirm => "Você tem certeza?", :method => :delete %></td>
+    <td align="center"><%= link_to image_tag('lib/qw3/remove-icon.png', :border => 0, :title => 'Remover'), administrator_item_menu_path(item), :confirm => "Você tem certeza?", :method => :delete %></td>
   </tr>
 <% end %>
 </table>

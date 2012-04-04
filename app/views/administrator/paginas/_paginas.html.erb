@@ -13,7 +13,7 @@
     <td><%= link_to pagina.titulo, edit_administrator_pagina_path( pagina ) %></td>
     <td><%= pagina.categoria_pagina.nome %></td>
     <td><%= strip_tags pagina.conteudo[0..170] %></td>
-    <td width="10%" align="center"><%= link_to image_tag('icons/remove-icon.png', :border => 0, :title => "Remover" ), "/administrator/paginas/#{pagina.id}", :confirm =>   'Você tem certeza?', :method => :delete %></td>
+    <td width="10%" align="center"><%= link_to image_tag('lib/qw3/remove-icon.png', :border => 0, :title => "Remover" ), "/administrator/paginas/#{pagina.id}", :confirm =>   'Você tem certeza?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
