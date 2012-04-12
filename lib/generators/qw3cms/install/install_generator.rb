@@ -13,23 +13,29 @@ module Qw3cms
       
       def insert_gem
         gem "ckeditor"
+        gem "metamagic"
       end
       
       # Implement the required interface for Rails::Generators::Migration.
       # taken from http://github.com/rails/rails/blob/master/activerecord/lib/generators/active_record.rb
       def self.next_migration_number(dirname)
         if ActiveRecord::Base.timestamped_migrations
-          Time.now.utc.strftime("%Y%m%d%H%M%S").to_s + rand(1230).to_s
+          Time.now.utc.strftime("%Y%m%d%H%M%S").to_s
         else
           "%.3d" % (current_migration_number(dirname) + 1)
         end
       end
       
       def create_migrations
-        migration_template 'db/migrate/create_menus.rb', 'db/migrate/create_menus.rb'
-        migration_template 'db/migrate/create_itens_menu.rb', 'db/migrate/create_itens_menu.rb'
-        migration_template 'db/migrate/create_categorias_pagina.rb', 'db/migrate/create_categorias_pagina.rb'
-        migration_template 'db/migrate/create_paginas.rb', 'db/migrate/create_paginas.rb'
+        if yes?( "Gerar migrations?" )
+          migration_template 'db/migrate/create_menus.rb', 'db/migrate/create_menus.rb'
+          sleep( 1.0 ) # Espera 1 segundo para que o timestamp da proxima migration seja diferente
+          migration_template 'db/migrate/create_itens_menu.rb', 'db/migrate/create_itens_menu.rb'
+          sleep( 1.0 ) # Espera 1 segundo para que o timestamp da proxima migration seja diferente
+          migration_template 'db/migrate/create_categorias_pagina.rb', 'db/migrate/create_categorias_pagina.rb'
+          sleep( 1.0 ) # Espera 1 segundo para que o timestamp da proxima migration seja diferente
+          migration_template 'db/migrate/create_paginas.rb', 'db/migrate/create_paginas.rb'
+        end
       end
       
       def create_ckeditor
@@ -39,7 +45,12 @@ module Qw3cms
           generate 'ckeditor:models --orm=active_record --backend=paperclip'
         end
         
-        rake "db:migrate"
+      end
+      
+      def migrate
+        if yes? "Executar rake:migrate?"
+          rake "db:migrate"
+        end
       end
       
       def create_routes
@@ -66,39 +77,49 @@ module Qw3cms
       end
       
       def create_function_menu_detalhes
-        inject_into_class 'app/controllers/administrator/admin_controller.rb', Administrator::AdminController do
-          "def menus_menu_detalhes
-            @detalhes_parcial = 'menus'
+        if yes?( "Deseja criar a função menu detalhes?" )
+          inject_into_class 'app/controllers/administrator/admin_controller.rb', Administrator::AdminController do
+            "def menus_menu_detalhes
+              @detalhes_parcial = 'menus'
+            end
+            def paginas_menu_detalhes
+              @detalhes_parcial = 'paginas'
+            end\n"
           end
-          def paginas_menu_detalhes
-            @detalhes_parcial = 'paginas'
-          end\n"
         end
       end
       
       def insert_menu_calls
-        inject_into_file "app/views/template/_leftbar.html.erb", :before => "</ul>" do
-          "<%= render '/administrator/menus/leftbar_item' %>
-          <%= render '/administrator/paginas/leftbar_item' %>\n"
+        if yes?( "Incluir chamadas de menu?" )
+          inject_into_file "app/views/template/_leftbar.html.erb", :before => "</ul>" do
+            "<%= render '/administrator/menus/leftbar_item' %>
+            <%= render '/administrator/paginas/leftbar_item' %>\n"
+          end
         end
       end
       
       def append_menu_css
-        append_file 'public/stylesheets/backend.css', do
-          "#leftbar .menus-leftbar {\nbackground:url(\"../images/menu-icons/menus.png\") no-repeat scroll 10px padding-box transparent;\n}\n
-          #leftbar .paginas-leftbar {\nbackground:url(\"../images/menu-icons/paginas.png\") no-repeat scroll 10px padding-box transparent;\n}\n"
+        if yes?( "Incluir configuração padrão no css?" )
+          append_file 'public/stylesheets/backend.css', do
+            "#leftbar .menus-leftbar {\nbackground:url(\"../images/menu-icons/menus.png\") no-repeat scroll 10px padding-box transparent;\n}\n
+            #leftbar .paginas-leftbar {\nbackground:url(\"../images/menu-icons/paginas.png\") no-repeat scroll 10px padding-box transparent;\n}\n"
+          end
         end
       end
       
       def copy_images
-        copy_file "public/images/icons/itens-menu.png", "public/images/icons/itens-menu.png"
-        copy_file "public/images/menu-icons/menus.png", "public/images/menu-icons/menus.png"
-        copy_file "public/images/menu-icons/paginas.png", "public/images/menu-icons/paginas.png"
+        if yes? "Copiar arquivos?"
+          copy_file "public/images/icons/itens-menu.png", "public/images/icons/itens-menu.png"
+          copy_file "public/images/menu-icons/menus.png", "public/images/menu-icons/menus.png"
+          copy_file "public/images/menu-icons/paginas.png", "public/images/menu-icons/paginas.png"
+        end
       end
       
       def copy_locales
-        copy_file "config/locales/ckeditor.en.yml", "config/locales/ckeditor.en.yml"
-        copy_file "config/locales/ckeditor.pt-BR.yml", "config/locales/ckeditor.pt-BR.yml"
+        if yes?( "Incluir locales?" )
+          copy_file "config/locales/ckeditor.en.yml", "config/locales/ckeditor.en.yml"
+          copy_file "config/locales/ckeditor.pt-BR.yml", "config/locales/ckeditor.pt-BR.yml"
+        end
       end
       
     end

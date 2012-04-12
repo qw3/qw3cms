@@ -8,6 +8,9 @@ class CreateItensMenu < ActiveRecord::Migration
       t.string :filtro
       t.integer :ordem
       t.boolean :publicado, :default => 1
+      t.string :titulo
+      t.text   :descricao
+      t.text   :palavras_chave
       t.references :menu
 
       t.timestamps

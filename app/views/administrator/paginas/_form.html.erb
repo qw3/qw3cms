@@ -16,13 +16,30 @@
     <%= f.select :categoria_pagina_id, options_for_select( CategoriaPagina.all.collect{ |c| [c.nome, c.id] }, @pagina.categoria_pagina_id), :include_blank => "-- Selecione uma Categoria --" %>
   </div>
   <div class="field">
-    <%= f.label :titulo, "Título" %> 
-    <%= f.text_field :titulo, :size => "110px" %>
+    <%= f.label :titulo_artigo, "Título do artigo" %> 
+    <%= f.text_field :titulo_artigo, :size => "110px" %>
   </div>
   <div class="field">
     <%= f.label :conteudo, "Conteúdo" %> 
     <%= f.cktext_area :conteudo, :toolbar=>'Full', :width=>'900px', :height=>'400px' %>
   </div>
+  <div class="esquerda">
+    <div class="field">
+      <%= f.label :titulo_pagina, "Título da página" %> 
+      <%= f.text_field :titulo_pagina, :size => 40 %>
+    </div>
+    <div class="field">
+      <%= f.label :palavras_chave, "Palavras chave (devem ser separadas por ponto e vírgula)" %> 
+      <%= f.text_field :palavras_chave, :size => 40 %>
+    </div>
+  </div>
+  <div class="direita">
+    <div class="field">
+      <%= f.label :descricao, "Descrição" %> 
+      <%= f.text_area :descricao, :rows => 5, :cols => 45 %>
+    </div>
+  </div>
+  <div class="clear"></div>
   <div class="actions">
 	<%= link_to "< Voltar", administrator_paginas_path, :class => 'button cancel' %>
     <%= f.submit :class => 'button', :value => 'Salvar' %>

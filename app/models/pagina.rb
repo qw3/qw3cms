@@ -2,7 +2,7 @@
 class Pagina < ActiveRecord::Base
   belongs_to :categoria_pagina
   
-  validates :titulo, :conteudo, :categoria_pagina, :presence => true
+  validates :titulo_artigo, :conteudo, :categoria_pagina, :presence => true
   
   def introtext
     html_splitted = self.conteudo.split '<hr />'
