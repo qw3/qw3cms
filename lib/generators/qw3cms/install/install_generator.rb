@@ -35,6 +35,7 @@ module Qw3cms
           migration_template 'db/migrate/create_categorias_pagina.rb', 'db/migrate/create_categorias_pagina.rb'
           sleep( 1.0 ) # Espera 1 segundo para que o timestamp da proxima migration seja diferente
           migration_template 'db/migrate/create_paginas.rb', 'db/migrate/create_paginas.rb'
+          sleep( 1.0 ) # Espera 1 segundo para que o timestamp da proxima migration seja diferente
         end
       end
       
