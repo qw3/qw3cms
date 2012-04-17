@@ -10,7 +10,7 @@
   <tr class="<%= cycle('linha0','linha1') %>">
     <td width="15%" align="center"><%= link_to image_tag( "backend/icons/edit.png" ), edit_administrator_menu_path(menu), :class => 'lightbox various fancybox.ajax' %></td>
     <td width="50%">
-      <%= link_to menu.nome, administrator_itens_menu_path( "menu[id]" => menu ) %>
+      <%= link_to menu.nome, administrator_itens_menu_path( "menu_id" => menu ) %>
     </td>
     <td>
       <%= menu.alias %>

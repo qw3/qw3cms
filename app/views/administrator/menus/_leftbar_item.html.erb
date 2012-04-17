@@ -3,10 +3,3 @@
     <span>Menus</span>
   <% end %>
 </li>
-<% if (@detalhes_parcial == 'menus') %>
-<li class="<%= (@detalhes_parcial == 'menus') ? 'menu-item-aberto' : 'menu-item-fechado' %>">
-  <ul class="menu submenu">
-  	<%= render "/administrator/menus/menu_detalhes" %>
-  </ul>
-</li>
-<% end %>
