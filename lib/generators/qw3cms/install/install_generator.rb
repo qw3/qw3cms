@@ -64,6 +64,9 @@ module Qw3cms
     resources :paginas
     controller :itens_menu do
       post 'itens_menu/buscar' => :index
+      match 'itens_menu/multi_remover'    => :multi_remover
+      match 'itens_menu/multi_publicar'   => :multi_publicar
+      match 'itens_menu/ordenar'          => :ordenar
     end
   end
   

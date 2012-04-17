@@ -6,6 +6,12 @@ class Administrator::ItensMenuController < Administrator::AdminController
   # GET /itens_menu
   # GET /itens_menu.xml
   def index
+
+    # nunca mostra todos os menus ao mesmo tempo
+    # se tiver vazio, mostra o primeiro menu
+    if params[:menu_id].blank?
+      params[:menu_id] = Menu.first.id
+    end
     
     conditions = []
     conditions << "menu_id = #{params[:menu_id]}" unless params[:menu_id].blank?
@@ -25,6 +31,7 @@ class Administrator::ItensMenuController < Administrator::AdminController
   # GET /itens_menu/new.xml
   def new
     @item_menu = ItemMenu.new
+    @item_menu.menu_id = params[:menu_id]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,11 +51,9 @@ class Administrator::ItensMenuController < Administrator::AdminController
 
     respond_to do |format|
       if @item_menu.save
-        format.html { redirect_to(administrator_itens_menu_path, :notice => 'Item de menu criado com sucesso.') }
-        format.xml  { render :xml => @item_menu, :status => :created, :location => @item_menu }
+        format.html { redirect_to(administrator_itens_menu_path(:menu_id => @item_menu.menu_id), :notice => 'Item de menu criado com sucesso.') }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @item_menu.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -60,11 +65,9 @@ class Administrator::ItensMenuController < Administrator::AdminController
 
     respond_to do |format|
       if @item_menu.update_attributes(params[:item_menu])
-        format.html { redirect_to(administrator_itens_menu_path, :notice => 'Item de menu atualizado com sucesso.') }
-        format.xml  { head :ok }
+        format.html { redirect_to(administrator_itens_menu_path(:menu_id => @item_menu.menu_id), :notice => 'Item de menu atualizado com sucesso.') }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @item_menu.errors, :status => :unprocessable_entity }
       end
     end
   end

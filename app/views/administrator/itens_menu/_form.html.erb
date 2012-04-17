@@ -16,10 +16,7 @@
       <%= f.label :nome%> 
       <%= f.text_field :nome %>
     </div>
-    <div class="field">
-      <%= f.label :alias, "Nome de sistema (preenchimento automático)" %>
-      <%= f.text_field :alias %>
-    </div>
+    
     <div class="field">
       <%= f.label :link %> 
       <%= f.text_field :link %>
@@ -31,6 +28,14 @@
     <div class="field">
       <%= f.label :menu_id %> 
       <%= f.select :menu_id, Menu.all.collect{ |m| [m.nome, m.id] }, :include_blank => "-- Selecione um menu --" %>
+    </div>
+    <div class="field">
+      <%= f.label :item_menu_pai, 'Item de menu pai' %> 
+      <%= f.select :item_menu_pai, itens_menu_options_for_select(@item_menu), :include_blank => "- Raiz do menu -" %>
+    </div>
+    <div class="field">
+      <%= f.label :alias, "Nome de sistema (preenchimento automático)" %>
+      <%= f.text_field :alias %>
     </div>
   </div>
   <div class="direita">
@@ -49,7 +54,7 @@
   </div>
   <div class="clear"></div>
   <div class="actions">
-    <%= link_to "< Voltar", administrator_itens_menu_path, :class => 'button cancel' %>
+    <%= link_to "< Voltar", administrator_itens_menu_path(:menu_id => @item_menu.menu_id), :class => 'button cancel' %>
     <%= f.submit :class => 'button', :value => 'Salvar' %>
   </div>
 <% end %>

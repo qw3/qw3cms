@@ -1,7 +1,23 @@
+<%= javascript_tag do %>
+  $(function() {
+    $('#itens_menu_form_buscar').live('click', function() {
+      $('form#itens_menu_form').attr('action', '/administrator/itens_menu');
+      $('form#itens_menu_form').attr('method', 'get');
+    });
+
+    $('select#menu_id').live('change', function() {
+      var url = "<%= new_administrator_item_menu_path %>?menu_id=" + $(this).val();
+      $('a#botao_adicionar_item_menu').attr('href', url);
+    });
+  });
+
+<% end %>
+
 <%= form_tag( "#", :id => "itens_menu_form", :name => "itens_menu_form") do %>
   <div class="page_header">
     <h1>Ítens de menu</h1>
-    <div class="menu-acoes direita">
+    <div class="menu-acoes">
+      <%= link_to 'Adicionar item de menu', new_administrator_item_menu_path(:menu_id => params[:menu_id]), :class => 'button add', :id => 'botao_adicionar_item_menu' %>
       <%= link_to "#", :class => "button publicar", :onclick => 'definirAction( "itens_menu_form", "/administrator/itens_menu/multi_publicar?publicar=1")' do %>
         <span>Publicar</span>
       <% end %>
@@ -15,6 +31,33 @@
   </div>
 
   <div class="inside">
+
+    <div class="filtros">
+
+      <div class="yui3-u-1-4">
+        <div class="field esquerda">
+            <%= label_tag :nome, 'Nome:' %>
+            <%= text_field_tag :nome, params[:nome] %>
+        </div>
+      </div>
+      <div class="yui3-u-1-4">
+        <div class="field">
+            <%= label_tag :menu_id, 'Menu:' %>
+            <%= select_tag :menu_id, options_for_select( Menu.all.collect{ |c| [c.nome, c.id]}, params[:menu_id]) %>
+        </div>
+      </div>
+      <div class="yui3-u-1-4">
+        <div class="field">
+            <%= label_tag :publicado, 'Publicado:' %>
+            <%= select_tag :publicado, options_for_select( [['- Todos -', ''], ['Publicado', 1], ['Despublicados', 0]], params[:publicado]) %>
+        </div>
+      </div>
+      <div class="yui3-u-1-5 botoes">
+        <%= submit_tag 'Buscar', :class => :button, :id => 'itens_menu_form_buscar' %>
+      </div>
+      <div class="clear"></div>
+
+    </div>
 
     <div id="itens-menu-index">
       <%= render "itens" %>

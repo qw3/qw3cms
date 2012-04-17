@@ -6,6 +6,7 @@ class ItemMenu < ActiveRecord::Base
   belongs_to :menu
   
   validates :alias, :uniqueness => true
+  validates :link, :nome, :alias, :menu_id, :presence => true
   
   before_save :montar_alias
   
@@ -28,6 +29,19 @@ class ItemMenu < ActiveRecord::Base
       self.link = '/' + self.link
     end
     return self.link
+  end
+
+  def item_pai
+    return ItemMenu.find_by_id(self.item_menu_pai)
+  end
+
+  def sub_itens
+    return ItemMenu.where(:item_menu_pai => self.id)
+  end
+
+  def descricao
+    return "#{self.item_pai.descricao} - #{self.nome}" unless self.item_pai.nil?
+    return self.nome
   end
   
 end
