@@ -1,22 +1,20 @@
 <table class="list">
   <tr>
-    <th>ID</th>
+    <th>Editar</th>
     <th>Nome</th>
     <th>Nome de sistema</th>
-    <th>Ítens do menu</th>
     <th>Remover ?</th>
   </tr>
 
 <% @menus.each do |menu| %>
   <tr class="<%= cycle('linha0','linha1') %>">
-    <td width="5%">
-      <%= link_to menu.id, edit_administrator_menu_path(menu) %>
+    <td width="15%" align="center"><%= link_to image_tag( "backend/icons/edit.png" ), edit_administrator_menu_path(menu), :class => 'lightbox various fancybox.ajax' %></td>
+    <td width="50%">
+      <%= link_to menu.nome, administrator_itens_menu_path( "menu[id]" => menu ) %>
     </td>
     <td>
-      <%= link_to menu.nome, edit_administrator_menu_path(menu) %>
+      <%= menu.alias %>
     </td>
-    <td><%= menu.alias %></td>
-    <td width="15%" align="center"><%= link_to image_tag( "lib/qw3/itens-menu.png" ), administrator_itens_menu_path( "menu[id]" => menu ) %></td>
     <td width="15%" align="center"><%= link_to image_tag('lib/qw3/remove-icon.png', :border => 0, :title => "remover"), administrator_menu_path(menu), :confirm => "Você tem certeza?", :method => :delete %></td>
   </tr>
 <% end %>

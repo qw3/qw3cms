@@ -6,12 +6,13 @@ class Administrator::MenusController < Administrator::AdminController
   # GET /menus
   # GET /menus.xml
   def index
-    @menus = Menu.paginate :page => params[:page]
+    conditions = []
+    conditions << "nome LIKE '%#{params[:menu_nome]}%'" unless params[:menu_nome].blank?
+    @menus = Menu.paginate( :page => params[:page], :conditions => conditions.join(' AND '))
 
     respond_to do |format|
       format.html # index.html.erb
       format.js
-      format.xml  { render :xml => @menus }
     end
   end
 
@@ -19,31 +20,23 @@ class Administrator::MenusController < Administrator::AdminController
   # GET /menus/new.xml
   def new
     @menu = Menu.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @menu }
-    end
+    render :layout => false
   end
 
   # GET /menus/1/edit
   def edit
     @menu = Menu.find(params[:id])
+    render :layout => false
   end
 
   # POST /menus
   # POST /menus.xml
   def create
     @menu = Menu.new(params[:menu])
+    @menu.save
 
     respond_to do |format|
-      if @menu.save
-        format.html { redirect_to(administrator_menus_path, :notice => 'Menu criado com sucesso.') }
-        format.xml  { render :xml => @menu, :status => :created, :location => @menu }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @menu.errors, :status => :unprocessable_entity }
-      end
+      format.js
     end
   end
 
@@ -51,15 +44,10 @@ class Administrator::MenusController < Administrator::AdminController
   # PUT /menus/1.xml
   def update
     @menu = Menu.find(params[:id])
+    @menu.update_attributes(params[:menu])
 
     respond_to do |format|
-      if @menu.update_attributes(params[:menu])
-        format.html { redirect_to(administrator_menus_path, :notice => 'Menu atualizado com sucesso.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @menu.errors, :status => :unprocessable_entity }
-      end
+      format.js
     end
   end
 
@@ -70,8 +58,7 @@ class Administrator::MenusController < Administrator::AdminController
     @menu.destroy
 
     respond_to do |format|
-      format.html { redirect_to(administrator_menus_url) }
-      format.xml  { head :ok }
+      format.js
     end
   end
 end

@@ -1,8 +1,28 @@
 <div class="page_header">
-  <h1>Menus da gem</h1>
+  <h1>Menus</h1>
+  <div class="aba_header">
+  	<%= link_to 'Adicionar Menu', new_administrator_menu_path, :class => 'lightbox various fancybox.ajax' %>
+  </div>
 </div>
 
 <div class="inside">
+
+	<div class="filtros">
+		<%= form_tag('/administrator/menus', :id => 'filtros_menu_form', :remote => true, :method => :get) do %>
+			<div class="yui3-u-1-4">
+				<div class="field">
+					<%= label_tag :menu_nome, 'Nome:'%>
+			    	<%= text_field_tag :menu_nome %>
+			    </div>
+			</div>
+			
+			<div class="yui3-u-1-3 botoes">
+				<%= submit_tag 'Buscar', :class => :button %>
+			</div>
+			<div class="clear"></div>
+		<% end %>
+	</div>
+
   <div id="menus-index">
     <%= render "menus" %>
   </div>

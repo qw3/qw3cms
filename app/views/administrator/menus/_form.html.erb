@@ -1,16 +1,4 @@
-<%= form_for([:administrator, @menu]) do |f| %>
-  <% if @menu.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@menu.errors.count, "erro" ) %>:</h2>
-
-      <ul>
-      <% @menu.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_for([:administrator, @menu], :remote => true) do |f| %>
   <div class="field">
     <%= f.label :nome %> 
     <%= f.text_field :nome %>
@@ -20,7 +8,6 @@
     <%= f.text_field :alias %>
   </div>
   <div class="actions">
-    <%= link_to "< Voltar", administrator_menus_path, :class => 'button cancel' %>
     <%= f.submit :class => 'button', :value => 'Salvar' %>
   </div>
 <% end %>
