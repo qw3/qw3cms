@@ -6,7 +6,7 @@ class ItemMenu < ActiveRecord::Base
   belongs_to :menu
   
   validates :alias, :uniqueness => true
-  validates :link, :nome, :alias, :menu_id, :presence => true
+  validates :link, :nome, :menu_id, :presence => true
   
   before_save :montar_alias
   
@@ -37,6 +37,10 @@ class ItemMenu < ActiveRecord::Base
 
   def sub_itens
     return ItemMenu.where(:item_menu_pai => self.id)
+  end
+
+  def folha?
+    return self.sub_itens.count.zero?
   end
 
   def descricao

@@ -17,6 +17,7 @@ class Administrator::ItensMenuController < Administrator::AdminController
     conditions << "menu_id = #{params[:menu_id]}" unless params[:menu_id].blank?
     conditions << "nome LIKE '%#{params[:nome]}%'" unless params[:nome].blank?
     conditions << "publicado = #{params[:publicado]}" unless params[:publicado].blank?
+    conditions << "item_menu_pai IS NULL"
     
     @itens_menu = ItemMenu.paginate :page => params[:page], :conditions => conditions.join(' AND '), :order => "ordem ASC"
 

@@ -11,29 +11,8 @@
     <th>Remover ?</th>
   </tr>
 
-<% @itens_menu.each do |item| %>
-  <tr class="<%= cycle('linha0','linha1') %>">
-    <td width="5%" align="center"><%= check_all_td item.id %></td>
-    <td width="5%">
-      <%= link_to item.id, edit_administrator_item_menu_path(item) %>
-    </td>
-    <td>
-      <%= link_to item.nome, edit_administrator_item_menu_path(item) %>
-    </td>
-    <td><%= item.alias %></td>
-    <td><%= item.link %></td>
-    <td><%= item.menu.nome %></td>
-    <td width="15%" align="center"><%= ordenar_td item.id, "itens_menu" %></td>
-    <td align="center" width="10%">
-      <% if item.publicado %>
-        <% icone = image_tag 'lib/qw3/publicado.png', :size => '16x16' %>
-      <% else %>
-        <% icone = image_tag 'lib/qw3/sair.png', :size => '16x16' %>
-      <% end %>
-      <%= link_to icone, "/administrator/itens_menu/#{item.id}/publicar" %>
-    </td>
-    <td align="center"><%= link_to image_tag('lib/qw3/remove-icon.png', :border => 0, :title => 'Remover'), administrator_item_menu_path(item), :confirm => "Você tem certeza?", :method => :delete %></td>
-  </tr>
+<% @itens_menu.each do |item_menu| %>
+  <%= render item_menu, :nivel => 0 %>
 <% end %>
 </table>
 <%= pagination_footer @itens_menu %>

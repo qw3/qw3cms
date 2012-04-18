@@ -1,0 +1,33 @@
+<tr class="<%= cycle('linha0','linha1') %>">
+    <td width="5%" align="center"><%= check_all_td item_menu.id %></td>
+    <td width="5%">
+      <%= link_to item_menu.id, edit_administrator_item_menu_path(item_menu) %>
+    </td>
+    <td>
+      <% unless item_menu.item_menu_pai.nil? %>
+        <span class="submenu_gi"> 
+          | 
+          <% for i in 1..nivel do %>
+            - 
+          <% end %> 
+        </span>
+      <% end %>
+      <%= link_to item_menu.nome, edit_administrator_item_menu_path(item_menu) %>
+    </td>
+    <td><%= item_menu.alias %></td>
+    <td><%= item_menu.link %></td>
+    <td><%= item_menu.menu.nome %></td>
+    <td width="15%" align="center"><%= ordenar_td item_menu.id, "itens_menu" %></td>
+    <td align="center" width="10%">
+      <% if item_menu.publicado %>
+        <% icone = image_tag 'lib/qw3/publicado.png', :size => '16x16' %>
+      <% else %>
+        <% icone = image_tag 'lib/qw3/sair.png', :size => '16x16' %>
+      <% end %>
+      <%= link_to icone, "/administrator/itens_menu/#{item_menu.id}/publicar" %>
+    </td>
+    <td align="center"><%= link_to image_tag('lib/qw3/remove-icon.png', :border => 0, :title => 'Remover'), administrator_item_menu_path(item_menu), :confirm => "Você tem certeza?", :method => :delete %></td>
+  </tr>
+  <% item_menu.sub_itens.each do |sub_item_menu| %>
+    <%= render sub_item_menu, :nivel => nivel + 1 %>
+  <% end %>
