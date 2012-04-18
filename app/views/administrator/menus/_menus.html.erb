@@ -15,7 +15,7 @@
     <td>
       <%= menu.alias %>
     </td>
-    <td width="15%" align="center"><%= link_to image_tag('lib/qw3/remove-icon.png', :border => 0, :title => "remover"), administrator_menu_path(menu), :confirm => "Você tem certeza?", :method => :delete %></td>
+    <td width="15%" align="center"><%= link_to image_tag('lib/qw3/remove-icon.png', :border => 0, :title => "remover"), administrator_menu_path(menu), :confirm => "Você tem certeza?", :method => :delete, :remote => true %></td>
   </tr>
 <% end %>
 </table>
