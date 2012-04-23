@@ -3,6 +3,7 @@ class PaginasController < FrontendController
 
   def show
     @pagina = Pagina.find( params[:id] )
+    @pagina.palavras_chave = "" if @pagina.palavras_chave.blank?
     
     meta :title => "#{Settings["LOJA.titulo"]} | #{@pagina.titulo_pagina}",
          :description => @pagina.descricao,
