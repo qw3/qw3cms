@@ -104,7 +104,7 @@ module Qw3cms
       
       def append_menu_css
         if yes?( "Incluir configuração padrão no css?" )
-          append_file 'public/stylesheets/backend.css', do
+          append_file 'public/stylesheets/backend.css' do
             "#leftbar .menus-leftbar {\nbackground:url(\"../images/menu-icons/menus.png\") no-repeat scroll 10px padding-box transparent;\n}\n
             #leftbar .paginas-leftbar {\nbackground:url(\"../images/menu-icons/paginas.png\") no-repeat scroll 10px padding-box transparent;\n}\n"
           end
@@ -125,7 +125,6 @@ module Qw3cms
           copy_file "config/locales/ckeditor.pt-BR.yml", "config/locales/ckeditor.pt-BR.yml"
         end
       end
-      
     end
   end
 end
