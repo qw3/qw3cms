@@ -6,7 +6,10 @@ class Administrator::PaginasController < Administrator::AdminController
   # GET /paginas
   # GET /paginas.xml
   def index
-    @paginas = Pagina.paginate :page => params[:page]
+    conditions = []
+    conditions << "titulo_artigo LIKE '%#{params[:filtro_titulo]}%'"
+    conditions << "categoria_pagina_id = #{params[:filtro_categoria]}" unless params[:filtro_categoria].blank?
+    @paginas = Pagina.paginate :page => params[:page], :order => "titulo_artigo ASC", :conditions => conditions.join( " AND " )
 
     respond_to do |format|
       format.html # index.html.erb

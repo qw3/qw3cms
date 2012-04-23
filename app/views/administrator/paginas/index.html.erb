@@ -1,6 +1,52 @@
+<script type="text/javascript">
+  $(function() {
+	  $('form#paginas_form a#admin_form_buscar').click(function() {
+      $("form#paginas_form").attr('action', '<%= administrator_paginas_path %>');
+      $("form#paginas_form").attr('method', 'get');
+      $("form#paginas_form").submit();
+    });
+
+    $('form#paginas_form a#admin_form_limpar').click(function() {
+      $("form#paginas_form").attr('action', '<%= administrator_paginas_path %>');
+      $("form#paginas_form").attr('method', 'get');
+      $("form#paginas_form #filtro_titulo").val(''); 
+      $("form#paginas_form #filtro_categoria").val( 0 );
+      $("form#paginas_form").submit();
+    });
+  });
+</script>
+
 <div class="page_header">
 	<h1>Páginas</h1>
 </div>
+
+<%= form_tag( '#', :id => "paginas_form", :name => "paginas_form" ) do %>
+  <div id="filtros-paginas" class="yui3-g inside">
+    <div class="yui3-u-1-5">
+      <div class="field">
+          <%= label_tag "filtro_titulo", 'Título:' %>
+          <%= text_field_tag "filtro_titulo", params[:filtro_titulo] %>
+      </div>
+    </div>
+    <div class="yui3-u-1-5">
+      <div class="field">
+          <%= label_tag "filtro_categoria", 'Categoria:' %>
+          <%= select_tag :filtro_categoria, options_for_select( CategoriaPagina.order( "nome ASC" ).collect{ |c| [c.nome, c.id] }, params[:filtro_categoria] ), :prompt => "-- Selecione --" %>
+      </div>
+    </div>
+    <div class="yui3-u-1-6 botoes">
+      <div class="actions">
+          <div class="esquerda">
+              <%= link_to 'Tudo', '#', :id => :admin_form_limpar, :class => :button %>
+          </div>
+          <div>
+            <%= link_to 'Buscar', '#', :id => :admin_form_buscar, :class => :button %>
+          </div>
+       </div>
+     </div>
+  </div>
+  <div class="clear"></div>
+<% end %>
 
 <div class="inside">
   <div id="paginas-index">
