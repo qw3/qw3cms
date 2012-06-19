@@ -160,4 +160,21 @@ class Administrator::ItensMenuController < Administrator::AdminController
       format.xml  { head :ok }
     end
   end
+  
+  def selecionar_link
+    @categorias = CategoriaPagina.order( "nome ASC" )
+    @paginas = Pagina.order( "titulo_artigo ASC" )
+  
+    respond_to do |format|
+      format.html { render :partial => "selecionar_link"}
+    end
+  end
+  
+  def gerar_link
+    @link = params[:link]
+  
+    respond_to do |format|
+      format.js
+    end
+  end
 end

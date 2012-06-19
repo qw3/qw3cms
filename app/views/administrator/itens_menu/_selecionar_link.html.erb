@@ -1,0 +1,25 @@
+<div id="selecionar-link">
+  <h2 id="pagina">Páginas</h2>
+  <h2 id="categoria">Categorias de Página</h2>
+  <h2 id="estatico">Estáticos</h2>
+  <div class="clear"></div>
+  
+  <div id="paginas">
+    <% @paginas.each do |pagina| %>
+      <%= link_to pagina.titulo_artigo, administrator_gerar_link_itens_menu_path( :link => "/paginas/show?id=#{pagina.id}" ), :remote => true %>
+    <% end %>
+  </div>
+  
+  <div id="categorias">
+    <% @categorias.each do |categoria| %>
+      <%= link_to categoria.nome, administrator_gerar_link_itens_menu_path( :link => "/categorias/#{categoria.id}"), :remote => true %>
+    <% end %>
+  </div>
+  
+  <div id="estaticos">
+    <%= link_to "Home", administrator_gerar_link_itens_menu_path( :link => "/" ), :remote => true %>
+    <%= link_to "Contato", administrator_gerar_link_itens_menu_path( :link => "/contato" ), :remote => true %>
+    <%= link_to "Produtos em destaque", administrator_gerar_link_itens_menu_path( :link => "#" ), :remote => true %>
+  </div>
+  
+</div>  

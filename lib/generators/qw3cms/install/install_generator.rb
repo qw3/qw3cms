@@ -67,6 +67,8 @@ module Qw3cms
       match 'itens_menu/multi_remover'    => :multi_remover
       match 'itens_menu/multi_publicar'   => :multi_publicar
       match 'itens_menu/ordenar'          => :ordenar
+      match 'selecionar_link_itens_menu'  => :selecionar_link
+      match 'gerar_link_itens_menu'       => :gerar_link
     end
   end
   
