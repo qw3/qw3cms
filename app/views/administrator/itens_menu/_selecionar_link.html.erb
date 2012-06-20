@@ -1,10 +1,10 @@
 <div id="selecionar-link">
-  <h2 id="pagina">Páginas</h2>
+  <h2 id="pagina" class="selecionado">Páginas</h2>
   <h2 id="categoria">Categorias de Página</h2>
   <h2 id="estatico">Estáticos</h2>
   <div class="clear"></div>
   
-  <div id="paginas">
+  <div id="paginas" class="selecionado">
     <% @paginas.each do |pagina| %>
       <%= link_to pagina.titulo_artigo, administrator_gerar_link_itens_menu_path( :link => "/paginas/show?id=#{pagina.id}" ), :remote => true %>
     <% end %>
