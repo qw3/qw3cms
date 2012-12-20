@@ -162,7 +162,7 @@ class Administrator::ItensMenuController < Administrator::AdminController
   end
   
   def selecionar_link
-    @categorias = CategoriaPagina.order( "nome ASC" )
+    @categorias = Categoria.order( "nome ASC" )
     @paginas = Pagina.order( "titulo_artigo ASC" )
   
     respond_to do |format|

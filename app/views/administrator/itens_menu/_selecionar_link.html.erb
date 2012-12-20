@@ -1,6 +1,6 @@
 <div id="selecionar-link">
   <h2 id="pagina" class="selecionado">Páginas</h2>
-  <h2 id="categoria">Categorias de Página</h2>
+  <h2 id="categoria">Categorias de Produtos</h2>
   <h2 id="estatico">Estáticos</h2>
   <div class="clear"></div>
   
@@ -12,7 +12,7 @@
   
   <div id="categorias">
     <% @categorias.each do |categoria| %>
-      <%= link_to categoria.nome, administrator_gerar_link_itens_menu_path( :link => "/categorias/#{categoria.id}"), :remote => true %>
+      <%= link_to categoria.descricao, administrator_gerar_link_itens_menu_path( :link => "/categorias/#{categoria.id}"), :remote => true %>
     <% end %>
   </div>
   

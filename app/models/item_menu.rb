@@ -5,7 +5,6 @@ class ItemMenu < ActiveRecord::Base
   
   belongs_to :menu
   
-  validates :alias, :uniqueness => true
   validates :link, :nome, :menu_id, :presence => true
   
   before_save :montar_alias
