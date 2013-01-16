@@ -24,7 +24,7 @@ class Administrator::ItensMenuController < Administrator::AdminController
     respond_to do |format|
       format.html # index.html.erb
       format.js
-      format.xml  { render :xml => @itens_menu }
+      format.xml { render :xml => @itens_menu }
     end
   end
 
@@ -36,7 +36,7 @@ class Administrator::ItensMenuController < Administrator::AdminController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @item_menu }
+      format.xml { render :xml => @item_menu }
     end
   end
 
@@ -81,17 +81,17 @@ class Administrator::ItensMenuController < Administrator::AdminController
 
     respond_to do |format|
       format.html { redirect_to(administrator_itens_menu_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
   
-  def publicar 
+  def publicar
     @item_menu = ItemMenu.find(params[:id])
     @item_menu.publicado = !@item_menu.publicado
     @item_menu.save
     respond_to do |format|
       format.html { redirect_to(administrator_itens_menu_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
   
@@ -109,11 +109,11 @@ class Administrator::ItensMenuController < Administrator::AdminController
     
     respond_to do |format|
       format.html { redirect_to(administrator_itens_menu_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
   
-  def multi_publicar 
+  def multi_publicar
     
     ids = params[:cid]
     if !ids.nil? and !ids.count.zero?
@@ -128,7 +128,7 @@ class Administrator::ItensMenuController < Administrator::AdminController
     
     respond_to do |format|
       format.html { redirect_to(administrator_itens_menu_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
   
@@ -138,7 +138,16 @@ class Administrator::ItensMenuController < Administrator::AdminController
       item = ItemMenu.find ids.first
       if !params[:cima].nil? and params[:cima].to_i == 0
         item.ordem = item.ordem + 1
-        item2 = ItemMenu.find_by_ordem item.ordem
+        # Menu possui pai?
+        if !item.item_pai.blank?
+          # Então precisamos pegar todos os filhos desse pai para atualizar corretamente o que estava depois
+          item2 = ItemMenu.menus_desse_pai( item.item_pai ).where( :ordem => item.ordem ).first
+        else
+          # Como ele é pai, recupera todos os pais para possibilitar a atualizacao
+          item2 = ItemMenu.menus_pai.where( :ordem => item.ordem ).first
+        end
+        # Se existir item2 então atualizamos a ordem dos dois, caso não exista, não devemos alterar a ordem pois
+        # o item1 já é o ultimo
         if !item2.nil?
           item2.ordem = item2.ordem - 1
           item2.save
@@ -146,7 +155,16 @@ class Administrator::ItensMenuController < Administrator::AdminController
         end
       else
         item.ordem = item.ordem - 1
-        item2 = ItemMenu.find_by_ordem item.ordem
+        # Menu possui pai?
+        if !item.item_pai.blank?
+          # Então precisamos pegar todos os filhos desse pai para atualizar corretamente o que estava depois
+          item2 = ItemMenu.menus_desse_pai( item.item_pai ).where( :ordem => item.ordem ).first
+        else
+          # Como ele é pai, recupera todos os pais para possibilitar a atualizacao
+          item2 = ItemMenu.menus_pai.where( :ordem => item.ordem ).first
+        end
+        # Se existir item2 então atualizamos a ordem dos dois, caso não exista, não devemos alterar a ordem pois
+        # o item1 já é o ultimo
         if !item2.nil?
           item2.ordem = item2.ordem + 1
           item2.save
@@ -157,7 +175,7 @@ class Administrator::ItensMenuController < Administrator::AdminController
     
     respond_to do |format|
       format.html { redirect_to(administrator_itens_menu_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
   

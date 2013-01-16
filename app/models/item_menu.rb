@@ -19,7 +19,15 @@ class ItemMenu < ActiveRecord::Base
     if ItemMenu.count.zero?
       self.ordem = 1
     else
-      self.ordem = ItemMenu.last.ordem + 1
+      if self.item_pai.blank?
+        self.ordem = ItemMenu.menus_pai.last.ordem + 1
+      else
+        if ItemMenu.menus_desse_pai.blank or ItemMenu.menus_desse_pai.count == 0
+          self.ordem = 1
+        else
+          self.ordem = ItemMenu.menus_desse_pai.last.ordem + 1
+        end
+      end
     end
   end
   
@@ -35,7 +43,7 @@ class ItemMenu < ActiveRecord::Base
   end
 
   def sub_itens
-    return ItemMenu.where(:item_menu_pai => self.id)
+    return ItemMenu.where(:item_menu_pai => self.id).order( :ordem )
   end
 
   def folha?
@@ -45,6 +53,17 @@ class ItemMenu < ActiveRecord::Base
   def descricao
     return "#{self.item_pai.descricao} - #{self.nome}" unless self.item_pai.nil?
     return self.nome
+  end
+
+  # Retorna todos os menus que não tem filhos
+  def self.menus_pai
+    return ItemMenu.where( :item_menu_pai => nil )
+  end
+
+  # Retorna todos os menus filhos de um determinado pai
+  def self.menus_desse_pai pai
+    return nil if pai.blank?
+    return ItemMenu.where( :item_menu_pai => pai )
   end
   
 end
